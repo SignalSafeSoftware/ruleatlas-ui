@@ -1,0 +1,27 @@
+name: release
+
+# Publishes @ruleatlas/discovery to npm when a version tag (v*) is pushed.
+# Requires an NPM_TOKEN repository secret with publish rights to the @ruleatlas scope.
+
+on:
+  push:
+    tags: ["v*"]
+  workflow_dispatch:
+
+jobs:
+  npm:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          registry-url: "https://registry.npmjs.org"
+      - name: Install
+        run: yarn install --frozen-lockfile || yarn install
+      - name: Build
+        run: yarn build
+      - name: Publish
+        run: npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
