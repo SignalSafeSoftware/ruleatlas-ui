@@ -1,21 +1,36 @@
-# @ruleatlas/discovery
+# @ruleatlas/ui
 
-Reusable React components for Discovery workspace surfaces: directory explorer, line-count-by-file-type table, and file types table.
+RuleAtlas's React UI component library — reusable, **presentational** components shared across
+RuleAtlas front-ends. Components receive data and callbacks via props; they do not fetch from
+RuleAtlas APIs, depend on React Router, or use browser dialog APIs, so they stay app-independent
+and easy to test.
 
-Components are **presentational** — they receive data and callbacks via props. They do not fetch from RuleAtlas APIs or depend on React Router.
+The library is intentionally general and will grow to cover more surfaces over time. Today it
+ships the Discovery workspace components (directory explorer, line-count-by-file-type table, file
+types table); additional component families will be added here rather than in new packages.
 
-## Install (monorepo workspace)
+## Install
 
 ```bash
+# In this repo (standalone):
 yarn install
+
+# As a dependency (peer deps: react, react-dom >= 18):
+yarn add @ruleatlas/ui
 ```
 
 ## Development
 
 ```bash
-yarn workspace @ruleatlas/discovery typecheck
-yarn workspace @ruleatlas/discovery test
-yarn workspace @ruleatlas/discovery build
+yarn typecheck
+yarn test
+yarn build
 ```
 
-See `docs/architecture/discovery-package-extraction.md`.
+In the RuleAtlas monorepo the same tasks are available as workspace scripts:
+
+```bash
+yarn workspace @ruleatlas/ui typecheck
+yarn workspace @ruleatlas/ui test
+yarn workspace @ruleatlas/ui build
+```
