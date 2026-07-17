@@ -1,6 +1,6 @@
 name: ci
 
-# CI for the @ruleatlas/discovery UI package (this directory becomes the repo root).
+# CI for the @ruleatlas/ui UI package (this directory becomes the repo root).
 
 on:
   push:
