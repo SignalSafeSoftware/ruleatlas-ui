@@ -40,6 +40,13 @@ export const DIRECTORY_COLUMNS: DirectoryColumn[] = [
   },
   { id: 'files', label: 'Files', align: 'end' },
   { id: 'size_bytes', label: 'Size', align: 'end' },
+  {
+    id: 'token_count',
+    label: 'Tokens',
+    align: 'end',
+    headerTitle:
+      'Model-specific token count when available; otherwise an approximate bytes/4 estimate.',
+  },
   { id: 'code_lines', label: 'Code', align: 'end' },
   { id: 'comment_lines', label: 'Comments', align: 'end' },
   { id: 'blank_lines', label: 'Blank', align: 'end' },
@@ -202,6 +209,9 @@ export function DirectoryExplorerTable({
             </td>
             <td className="text-end" data-testid="discovery-directory-explorer-footer-size_bytes">
               {formatBytes(footerTotals.sizeBytes)}
+            </td>
+            <td className="text-end" data-testid="discovery-directory-explorer-footer-token_count">
+              {formatCount(footerTotals.tokenCount)}
             </td>
             <td className="text-end" data-testid="discovery-directory-explorer-footer-code_lines">
               {formatCount(footerTotals.codeLines)}

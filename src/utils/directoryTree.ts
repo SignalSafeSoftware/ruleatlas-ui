@@ -8,6 +8,7 @@ export type DirectorySortColumnId =
   | 'folders'
   | 'files'
   | 'size_bytes'
+  | 'token_count'
   | 'code_lines'
   | 'comment_lines'
   | 'blank_lines'
@@ -42,6 +43,7 @@ export type DirectoryTreeNode = {
   foldersCount: number;
   filesCount: number;
   sizeBytes: number;
+  tokenCount: number;
   codeLines: number;
   commentLines: number;
   blankLines: number;
@@ -81,6 +83,7 @@ type NormalizedFile = {
   overridePattern?: string | null;
   bucket: string;
   sizeBytes: number;
+  tokenCount: number;
   codeLines: number;
   commentLines: number;
   blankLines: number;
@@ -106,6 +109,18 @@ function lineValue(value: number | null | undefined): number {
   return typeof value === 'number' && Number.isFinite(value) ? value : 0;
 }
 
+/** Prefer persisted model token counts; fall back to size_bytes / 4. */
+export function estimateTokenCount(
+  tokenCount: number | null | undefined,
+  sizeBytes: number | null | undefined,
+): number {
+  if (typeof tokenCount === 'number' && Number.isFinite(tokenCount) && tokenCount >= 0) {
+    return tokenCount;
+  }
+  const bytes = sizeValue(sizeBytes);
+  return bytes <= 0 ? 0 : Math.ceil(bytes / 4);
+}
+
 export function normalizeDiscoveryFile(file: DiscoveryInventoryFile): NormalizedFile {
   const displayPath = file.display_path || file.path;
   const rawPath = file.path;
@@ -127,6 +142,7 @@ export function normalizeDiscoveryFile(file: DiscoveryInventoryFile): Normalized
     overridePattern: file.override_pattern ?? null,
     bucket: file.production_bucket ?? 'unknown',
     sizeBytes: sizeValue(file.size_bytes),
+    tokenCount: estimateTokenCount(file.token_count, file.size_bytes),
     codeLines: lineValue(file.code_line_count),
     commentLines: lineValue(file.comment_line_count),
     blankLines: lineValue(file.blank_line_count),
@@ -164,6 +180,7 @@ function aggregateMetrics(nodes: DirectoryTreeNode[]): Omit<
   let needsReviewCount = 0;
   let filesCount = 0;
   let sizeBytes = 0;
+  let tokenCount = 0;
 
   for (const node of nodes) {
     if (node.kind === 'file') {
@@ -174,6 +191,7 @@ function aggregateMetrics(nodes: DirectoryTreeNode[]): Omit<
       filesCount += node.filesCount;
     }
     sizeBytes += node.sizeBytes;
+    tokenCount += node.tokenCount;
     codeLines += node.codeLines;
     commentLines += node.commentLines;
     blankLines += node.blankLines;
@@ -190,6 +208,7 @@ function aggregateMetrics(nodes: DirectoryTreeNode[]): Omit<
     foldersCount,
     filesCount,
     sizeBytes,
+    tokenCount,
     codeLines,
     commentLines,
     blankLines,
@@ -219,6 +238,7 @@ function fileToNode(file: NormalizedFile): DirectoryTreeNode {
     foldersCount: 0,
     filesCount: 1,
     sizeBytes: file.sizeBytes,
+    tokenCount: file.tokenCount,
     codeLines: file.codeLines,
     commentLines: file.commentLines,
     blankLines: file.blankLines,
@@ -282,6 +302,8 @@ export function directoryNodeSortValue(
       return node.filesCount;
     case 'size_bytes':
       return node.sizeBytes;
+    case 'token_count':
+      return node.tokenCount;
     case 'code_lines':
       return node.codeLines;
     case 'comment_lines':
@@ -352,6 +374,7 @@ function finalizeFolder(folder: MutableFolder): DirectoryTreeNode {
     foldersCount: childFolderNodes.length,
     filesCount: metrics.filesCount,
     sizeBytes: metrics.sizeBytes,
+    tokenCount: metrics.tokenCount,
     codeLines: metrics.codeLines,
     commentLines: metrics.commentLines,
     blankLines: metrics.blankLines,
@@ -583,6 +606,7 @@ export function folderRawPath(displayPath: string, sourceRootPrefix: string | nu
 export type DirectoryExplorerTotals = {
   files: number;
   sizeBytes: number;
+  tokenCount: number;
   codeLines: number;
   commentLines: number;
   blankLines: number;
@@ -626,6 +650,7 @@ export function computeDirectoryExplorerTotals(
 
   let filesCount = 0;
   let sizeBytes = 0;
+  let tokenCount = 0;
   let codeLines = 0;
   let commentLines = 0;
   let blankLines = 0;
@@ -637,6 +662,7 @@ export function computeDirectoryExplorerTotals(
       if (node.kind === 'file') {
         filesCount += 1;
         sizeBytes += node.sizeBytes;
+        tokenCount += node.tokenCount;
         codeLines += node.codeLines;
         commentLines += node.commentLines;
         blankLines += node.blankLines;
@@ -651,6 +677,7 @@ export function computeDirectoryExplorerTotals(
   return {
     files: filesCount,
     sizeBytes,
+    tokenCount,
     codeLines,
     commentLines,
     blankLines,

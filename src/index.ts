@@ -29,6 +29,7 @@ export {
   computeDirectoryExplorerTotals,
   DEFAULT_DIRECTORY_SORT,
   directoryNodeKindLabel,
+  estimateTokenCount,
   extensionFromPath,
   flattenLazyVisibleTree,
   flattenVisibleTree,

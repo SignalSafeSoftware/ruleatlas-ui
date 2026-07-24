@@ -98,6 +98,7 @@ export function DirectoryExplorerRow({
       <td className="text-end">{row.kind === 'file' ? '—' : formatCount(row.foldersCount)}</td>
       <td className="text-end">{formatCount(row.filesCount)}</td>
       <td className="text-end">{formatBytes(row.sizeBytes)}</td>
+      <td className="text-end">{formatCount(row.tokenCount)}</td>
       <td className="text-end">{formatCount(row.codeLines)}</td>
       <td className="text-end">{formatCount(row.commentLines)}</td>
       <td className="text-end">{formatCount(row.blankLines)}</td>

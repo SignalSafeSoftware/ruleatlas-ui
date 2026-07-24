@@ -20,6 +20,7 @@ export type DiscoveryInventoryFile = {
   code_line_count?: number | null;
   comment_line_count?: number | null;
   blank_line_count?: number | null;
+  token_count?: number | null;
   rule_count?: number | null;
   needs_review?: boolean | null;
 };
