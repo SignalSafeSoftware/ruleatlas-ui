@@ -24,7 +24,7 @@ export type {
   TieBreaker,
 } from './discoveryMetricsTableTypes';
 
-function MetricsTableToolbar<T extends Record<string, unknown>>({
+function MetricsTableToolbar({
   testId,
   filterPlaceholder,
   filterText,
@@ -221,6 +221,7 @@ export function DiscoveryMetricsTable<T extends Record<string, unknown>>({
   tableNote,
   fillHeight = false,
   expandable,
+  pageSize,
 }: Readonly<{
   title: string;
   description?: string;
@@ -244,10 +245,12 @@ export function DiscoveryMetricsTable<T extends Record<string, unknown>>({
   tableNote?: React.ReactNode;
   fillHeight?: boolean;
   expandable?: MetricsTableExpandable<T>;
+  pageSize?: number;
 }>): React.ReactElement {
   const [sortColumnId, setSortColumnId] = useState(defaultSort?.columnId ?? columns[0]?.id ?? '');
   const [sortDirection, setSortDirection] = useState<SortDirection>(defaultSort?.direction ?? 'desc');
   const [filterText, setFilterText] = useState('');
+  const [page, setPage] = useState(1);
 
   const sortedFilteredRows = useMemo(
     () =>
@@ -264,6 +267,18 @@ export function DiscoveryMetricsTable<T extends Record<string, unknown>>({
   );
 
   const filterActive = filterText.trim().length > 0;
+  const normalizedPageSize =
+    pageSize && Number.isFinite(pageSize) && pageSize > 0 ? Math.floor(pageSize) : null;
+  const pageCount = normalizedPageSize
+    ? Math.max(1, Math.ceil(sortedFilteredRows.length / normalizedPageSize))
+    : 1;
+  const activePage = Math.min(page, pageCount);
+  const visibleRows = normalizedPageSize
+    ? sortedFilteredRows.slice(
+        (activePage - 1) * normalizedPageSize,
+        activePage * normalizedPageSize,
+      )
+    : sortedFilteredRows;
   const footerSpec = useMemo(() => {
     if (!footerRow || rows.length === 0) return null;
     const ctx: MetricsTableFooterContext<T> = {
@@ -276,12 +291,23 @@ export function DiscoveryMetricsTable<T extends Record<string, unknown>>({
 
   function toggleSort(column: MetricsTableColumn<T>): void {
     if (column.sortable === false) return;
+    setPage(1);
     if (sortColumnId === column.id) {
       setSortDirection((current) => (current === 'asc' ? 'desc' : 'asc'));
       return;
     }
     setSortColumnId(column.id);
     setSortDirection(column.align === 'end' ? 'desc' : 'asc');
+  }
+
+  function changeFilter(value: string): void {
+    setFilterText(value);
+    setPage(1);
+  }
+
+  function changeScope(value: string): void {
+    setPage(1);
+    scopeFilter?.onChange(value);
   }
 
   return (
@@ -297,15 +323,22 @@ export function DiscoveryMetricsTable<T extends Record<string, unknown>>({
         testId={testId}
         filterPlaceholder={filterPlaceholder}
         filterText={filterText}
-        onFilterChange={setFilterText}
-        scopeFilter={scopeFilter}
+        onFilterChange={changeFilter}
+        scopeFilter={
+          scopeFilter
+            ? {
+                ...scopeFilter,
+                onChange: changeScope,
+              }
+            : undefined
+        }
       />
       {rows.length === 0 ? (
         <p className="text-body-secondary small mb-0">{emptyLabel}</p>
       ) : (
         <MetricsTableBody
           columns={columns}
-          rows={sortedFilteredRows}
+          rows={visibleRows}
           testId={testId}
           sortColumnId={sortColumnId}
           sortDirection={sortDirection}
@@ -314,6 +347,46 @@ export function DiscoveryMetricsTable<T extends Record<string, unknown>>({
           footerSpec={footerSpec}
         />
       )}
+      {normalizedPageSize && sortedFilteredRows.length > 0 ? (
+        <nav
+          className="d-flex flex-wrap align-items-center justify-content-between gap-2 mt-2"
+          aria-label={`${title} pagination`}
+          data-testid={`${testId}-pagination`}
+        >
+          <span className="small text-body-secondary" data-testid={`${testId}-pagination-summary`}>
+            Showing {(activePage - 1) * normalizedPageSize + 1}–
+            {Math.min(activePage * normalizedPageSize, sortedFilteredRows.length)} of{' '}
+            {sortedFilteredRows.length}
+          </span>
+          <div className="btn-group btn-group-sm" role="group" aria-label="Pagination controls">
+            <button
+              type="button"
+              className="btn btn-outline-secondary"
+              disabled={activePage === 1}
+              onClick={() => setPage((current) => Math.max(1, current - 1))}
+              data-testid={`${testId}-previous-page`}
+            >
+              Previous
+            </button>
+            <span
+              className="btn btn-outline-secondary disabled"
+              aria-current="page"
+              data-testid={`${testId}-page-status`}
+            >
+              Page {activePage} of {pageCount}
+            </span>
+            <button
+              type="button"
+              className="btn btn-outline-secondary"
+              disabled={activePage === pageCount}
+              onClick={() => setPage((current) => Math.min(pageCount, current + 1))}
+              data-testid={`${testId}-next-page`}
+            >
+              Next
+            </button>
+          </div>
+        </nav>
+      ) : null}
       {tableNote ? <div className="mt-3">{tableNote}</div> : null}
     </div>
   );
