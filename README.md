@@ -46,7 +46,7 @@ yarn workspace @ruleatlas/ui build
 
 ## Release
 
-Version 0.1.0 is an unpublished first-release candidate. Public registry lookup returned 404 on 2026-10-21; this does not establish private registry availability.
+Version 0.1.0 is approved for first publication on 2026-10-21. Public registry lookup returned 404 on 2026-10-21; this does not establish private registry availability.
 
 The release workflow uses frozen dependency installs, runs lint, typecheck, tests, build, dependency
 audit, and installed-package validation before publishing, validates the package tag, and pins third-party

@@ -1,6 +1,6 @@
 # Release preparation
 
-The candidate is `@ruleatlas/ui@0.1.0`, retaining the existing first-release version. npm public metadata returned HTTP 404 on 2026-10-21; verify authenticated registry scope ownership and visibility before publication.
+The coordinated release is `@ruleatlas/ui@0.1.0`, retaining the existing first-release version. npm public metadata returned HTTP 404 on 2026-10-21; verify authenticated registry scope ownership and visibility before publication.
 
 Use Node 24 and the committed Yarn lock. Run `yarn install --frozen-lockfile`, `yarn typecheck`, `yarn lint`, `yarn test`, `yarn build`, `yarn check:package`, `yarn audit --json` and inspect `npm pack --dry-run --json`. Verify a packed installed consumer independently of the source tree. Accessibility assertions must remain active.
 

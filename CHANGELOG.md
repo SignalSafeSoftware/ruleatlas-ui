@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.1.0 — unpublished release candidate, 2026-10-21
+## 0.1.0 — release approved 2026-10-21
 
 - Presentational Discovery components with interaction and accessibility tests.
 - Incorporate verified upstream Vite 8.3.4 and Vitest 5.0.3 tooling changes without changing runtime exports.
