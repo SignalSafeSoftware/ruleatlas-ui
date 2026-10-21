@@ -1,5 +1,10 @@
 # RuleAtlas UI current-state summary
 
+## Coordinated release preparation — 2026-10-21
+
+The candidate retains source version 0.1.0 for first publication. Its source incorporates upstream dependency and Vitest 5 accessibility-test updates at ca25d64662e1e56118a430e9ce47d39d5a645786 and preserves the local planning notes below. Historical July results are not current release evidence. Current verification is recorded separately in the release coordination packet; publication requires user approval.
+
+
 **Authority date:** 2026-07-28  
 **Audit:** [audit-findings-2026-07-28.md](audit-findings-2026-07-28.md)
 
@@ -46,3 +51,9 @@ The repository is release-ready at the library boundary. The RuleAtlas monorepo 
 the package from `main`; the checkout observed during validation was
 `5d6004b35e962e755894506d376e8faf4efa6ed6`. Publish and application production-readiness decisions
 remain separate from this package-level audit.
+
+## DeliveryPlus planning note — 2026-10-15
+
+Local source versions: `@ruleatlas/ui` 0.1.0. These values come from package manifests/version authorities and do not certify registry publication or current production deployments. The July audit and feature details above retain their original evidence date.
+
+No change to these RuleAtlas package contracts is required by DeliveryPlus customer subdomains. Keep their existing RuleAtlas boundaries and domain behavior; add no DeliveryPlus Company models, tenant database selection or authentication dependencies. Application-specific routing/security stays in its host. See the DeliveryPlus feature plan (`DeliveryPlus/docs/features/customer-subdomains.md` in the host repository) and ecosystem summary (`DeliveryPlus/docs/ai/ecosystem-package-summary.md` in the host repository). This refresh does not rerun the July checks or certify readiness for a new release.

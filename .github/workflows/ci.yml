@@ -32,3 +32,7 @@ jobs:
         run: yarn test
       - name: Build
         run: yarn build
+      - name: Dependency audit
+        run: yarn audit --json
+      - name: Installed package ESM and React compatibility
+        run: yarn check:package

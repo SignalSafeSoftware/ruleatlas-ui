@@ -3,7 +3,7 @@ import {
   formatCellValue,
   metricsSortAriaValue,
   sortAndFilterMetricsRows,
-} from './discoveryMetricsTableHelpers';
+} from './discoveryMetricsTableHelpers.js';
 import type {
   MetricsTableColumn,
   MetricsTableExpandable,
@@ -12,7 +12,7 @@ import type {
   MetricsTableScopeOption,
   SortDirection,
   TieBreaker,
-} from './discoveryMetricsTableTypes';
+} from './discoveryMetricsTableTypes.js';
 
 export type {
   MetricsTableColumn,
@@ -22,7 +22,7 @@ export type {
   MetricsTableScopeOption,
   SortDirection,
   TieBreaker,
-} from './discoveryMetricsTableTypes';
+} from './discoveryMetricsTableTypes.js';
 
 function MetricsTableToolbar({
   testId,
@@ -392,7 +392,7 @@ export function DiscoveryMetricsTable<T extends Record<string, unknown>>({
   );
 }
 
-export { formatPercent } from '../utils/numberFormat';
+export { formatPercent } from '../utils/numberFormat.js';
 
 export const BUCKET_LABELS: Record<string, string> = {
   production: 'Production',

@@ -7,7 +7,7 @@ import {
   type MetricsTableScopeOption,
   type SortDirection,
   type TieBreaker,
-} from './DiscoveryMetricsTable';
+} from './DiscoveryMetricsTable.js';
 
 export type LineCountByFileTypeTableProps<T extends Record<string, unknown>> = {
   title: string;

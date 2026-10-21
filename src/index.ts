@@ -1,4 +1,4 @@
-export { DirectoryExplorer } from './components/DirectoryExplorer';
+export { DirectoryExplorer } from './components/DirectoryExplorer.js';
 export {
   DiscoveryMetricsTable,
   formatPercent,
@@ -11,18 +11,18 @@ export {
   type MetricsTableScopeOption,
   type SortDirection,
   type TieBreaker,
-} from './components/DiscoveryMetricsTable';
-export { DiscoveryRowToggle, DiscoveryRowToggleSpacer } from './components/DiscoveryRowToggle';
-export { FileTypeBadge, FileTypesTable } from './components/FileTypesTable';
-export { LineCountByFileTypeTable, type LineCountByFileTypeTableProps } from './components/LineCountByFileTypeTable';
-export type { RowActionItem } from './types/actions';
+} from './components/DiscoveryMetricsTable.js';
+export { DiscoveryRowToggle, DiscoveryRowToggleSpacer } from './components/DiscoveryRowToggle.js';
+export { FileTypeBadge, FileTypesTable } from './components/FileTypesTable.js';
+export { LineCountByFileTypeTable, type LineCountByFileTypeTableProps } from './components/LineCountByFileTypeTable.js';
+export type { RowActionItem } from './types/actions.js';
 export type {
   DiscoveryInventoryFile,
   DirectoryExplorerActions,
   DirectoryExplorerRenderers,
   FileTypeMappingRow,
   FileTypesTableProps,
-} from './types/discovery';
+} from './types/discovery.js';
 export {
   allExpandableFolderIds,
   buildDirectoryTree,
@@ -45,8 +45,8 @@ export {
   type DirectorySortDirection,
   type DirectoryTreeNode,
   type FlatDirectoryRow,
-} from './utils/directoryTree';
-export { buildDiscoveryFileRowActions, type DiscoveryInventoryFileRow } from './utils/discoveryFileRowActions';
+} from './utils/directoryTree.js';
+export { buildDiscoveryFileRowActions, type DiscoveryInventoryFileRow } from './utils/discoveryFileRowActions.js';
 export {
   buildExcludeConfirmMessage,
   containingFolderDisplayPath,
@@ -55,7 +55,7 @@ export {
   folderExcludeGlob,
   isProjectRootExcludeTarget,
   type ExcludeConfirmKind,
-} from './utils/excludeScope';
-export { formatBytes } from './utils/formatBytes';
-export { humanizeToken, humanizeTokenLower } from './utils/humanizeToken';
-export { formatInteger } from './utils/numberFormat';
+} from './utils/excludeScope.js';
+export { formatBytes } from './utils/formatBytes.js';
+export { humanizeToken, humanizeTokenLower } from './utils/humanizeToken.js';
+export { formatInteger } from './utils/numberFormat.js';

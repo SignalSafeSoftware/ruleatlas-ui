@@ -1,4 +1,4 @@
-import type { DirectorySortDirection } from '../utils/directoryTree';
+import type { DirectorySortDirection } from '../utils/directoryTree.js';
 
 export function directorySortAriaValue(
   sortable: boolean,

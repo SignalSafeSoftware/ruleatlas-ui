@@ -1,6 +1,6 @@
-import type { RowActionItem } from '../types/actions';
-import type { DirectoryExplorerActions } from '../types/discovery';
-import { containingFolderRawPath, isProjectRootExcludeTarget } from './excludeScope';
+import type { RowActionItem } from '../types/actions.js';
+import type { DirectoryExplorerActions } from '../types/discovery.js';
+import { containingFolderRawPath, isProjectRootExcludeTarget } from './excludeScope.js';
 
 export type DiscoveryInventoryFileRow = {
   rawPath: string;
