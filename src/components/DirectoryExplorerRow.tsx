@@ -1,14 +1,14 @@
-import type { DirectoryExplorerActions, DirectoryExplorerRenderers } from '../types/discovery';
-import type { RowActionItem } from '../types/actions';
-import { formatInteger } from '../utils/numberFormat';
-import { formatBytes } from '../utils/formatBytes';
+import type { DirectoryExplorerActions, DirectoryExplorerRenderers } from '../types/discovery.js';
+import type { RowActionItem } from '../types/actions.js';
+import { formatInteger } from '../utils/numberFormat.js';
+import { formatBytes } from '../utils/formatBytes.js';
 import {
   directoryNodeKindLabel,
   folderRawPath,
   type FlatDirectoryRow,
-} from '../utils/directoryTree';
-import { buildDiscoveryFileRowActions } from '../utils/discoveryFileRowActions';
-import { DiscoveryRowToggle, DiscoveryRowToggleSpacer } from './DiscoveryRowToggle';
+} from '../utils/directoryTree.js';
+import { buildDiscoveryFileRowActions } from '../utils/discoveryFileRowActions.js';
+import { DiscoveryRowToggle, DiscoveryRowToggleSpacer } from './DiscoveryRowToggle.js';
 
 function kindLabel(row: FlatDirectoryRow): string {
   return directoryNodeKindLabel(row);

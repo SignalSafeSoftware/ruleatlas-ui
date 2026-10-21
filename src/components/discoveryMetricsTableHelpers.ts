@@ -1,9 +1,9 @@
-import { formatInteger } from '../utils/numberFormat';
+import { formatInteger } from '../utils/numberFormat.js';
 import type {
   MetricsTableColumn,
   SortDirection,
   TieBreaker,
-} from './discoveryMetricsTableTypes';
+} from './discoveryMetricsTableTypes.js';
 
 export function formatCellValue<T extends Record<string, unknown>>(
   raw: unknown,

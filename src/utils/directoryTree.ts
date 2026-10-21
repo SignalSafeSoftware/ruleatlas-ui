@@ -1,5 +1,5 @@
-import type { DiscoveryInventoryFile } from '../types/discovery';
-import { humanizeToken } from './humanizeToken';
+import type { DiscoveryInventoryFile } from '../types/discovery.js';
+import { humanizeToken } from './humanizeToken.js';
 
 export type DirectorySortColumnId =
   | 'name'

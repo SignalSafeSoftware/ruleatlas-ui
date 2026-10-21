@@ -46,7 +46,7 @@ export type {
   DirectorySortDirection,
   DirectoryTreeNode,
   FlatDirectoryRow,
-} from '../utils/directoryTree';
+} from '../utils/directoryTree.js';
 
 export type DirectoryExplorerActions = {
   onCopyDisplayPath: (displayPath: string) => void;
@@ -61,8 +61,8 @@ export type DirectoryExplorerActions = {
 };
 
 export type DirectoryExplorerRenderers = {
-  renderFileTypeIcon: (row: import('../utils/directoryTree').FlatDirectoryRow) => ReactNode;
-  renderClassification: (row: import('../utils/directoryTree').FlatDirectoryRow) => ReactNode;
+  renderFileTypeIcon: (row: import('../utils/directoryTree.js').FlatDirectoryRow) => ReactNode;
+  renderClassification: (row: import('../utils/directoryTree.js').FlatDirectoryRow) => ReactNode;
   renderRowActions: (
     items: Array<{ id: string; label: string; icon?: string; onClick?: () => void; href?: string }>,
     testId: string,

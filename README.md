@@ -17,7 +17,7 @@ types table); additional component families will be added here rather than in ne
 
 ```bash
 # In this repo (standalone):
-yarn install
+yarn install --frozen-lockfile
 
 # As a dependency (peer deps: react, react-dom >= 18):
 yarn add @ruleatlas/ui
@@ -30,6 +30,7 @@ yarn typecheck
 yarn lint
 yarn test
 yarn build
+yarn check:package
 yarn audit --json
 npm pack --dry-run --json
 ```
@@ -45,7 +46,9 @@ yarn workspace @ruleatlas/ui build
 
 ## Release
 
+Version 0.1.0 is approved for first publication on 2026-10-21. Public registry lookup returned 404 on 2026-10-21; this does not establish private registry availability.
+
 The release workflow uses frozen dependency installs, runs lint, typecheck, tests, build, dependency
-review, and package validation before publishing, validates the package tag, and pins third-party
+audit, and installed-package validation before publishing, validates the package tag, and pins third-party
 actions. See [docs/current-state-summary.md](docs/current-state-summary.md) for the latest verified
 results.

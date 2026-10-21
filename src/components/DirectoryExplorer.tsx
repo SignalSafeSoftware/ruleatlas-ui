@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react';
-import type { DiscoveryInventoryFile, DirectoryExplorerActions, DirectoryExplorerRenderers } from '../types/discovery';
+import type { DiscoveryInventoryFile, DirectoryExplorerActions, DirectoryExplorerRenderers } from '../types/discovery.js';
 import {
   allExpandableFolderIds,
   buildDirectoryTree,
@@ -11,17 +11,17 @@ import {
   type DirectorySortColumnId,
   type DirectorySortDirection,
   type FlatDirectoryRow,
-} from '../utils/directoryTree';
+} from '../utils/directoryTree.js';
 import {
   directoryExplorerDescription,
   directoryExplorerEmptyCopy,
   fireAndForget,
-} from '../utils/directoryExplorerHelpers';
+} from '../utils/directoryExplorerHelpers.js';
 import {
   DirectoryExplorerTable,
   DirectoryExplorerToolbar,
   type DirectoryColumn,
-} from './DirectoryExplorerTable';
+} from './DirectoryExplorerTable.js';
 
 type LazyTreeProp = {
   status: {
@@ -32,15 +32,15 @@ type LazyTreeProp = {
     total_inventory_count?: number;
     tree_state?: string;
   } | null;
-  rootNodes: import('../utils/directoryTree').DirectoryTreeNode[];
-  childrenById: Map<string, import('../utils/directoryTree').DirectoryTreeNode[]>;
+  rootNodes: import('../utils/directoryTree.js').DirectoryTreeNode[];
+  childrenById: Map<string, import('../utils/directoryTree.js').DirectoryTreeNode[]>;
   loading: boolean;
   materializing?: boolean;
   error: string | null;
   materializeError?: string | null;
   needsMaterialize?: boolean;
   materialize?: () => Promise<void>;
-  loadChildren: (node: import('../utils/directoryTree').DirectoryTreeNode) => Promise<void>;
+  loadChildren: (node: import('../utils/directoryTree.js').DirectoryTreeNode) => Promise<void>;
 };
 
 const EMPTY_LAZY_TREE: LazyTreeProp = {

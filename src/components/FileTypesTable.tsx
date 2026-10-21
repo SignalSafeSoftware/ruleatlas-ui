@@ -1,5 +1,5 @@
-import { humanizeToken } from '../utils/humanizeToken';
-import type { FileTypesTableProps } from '../types/discovery';
+import { humanizeToken } from '../utils/humanizeToken.js';
+import type { FileTypesTableProps } from '../types/discovery.js';
 
 export function FileTypeBadge({ language, displayType }: Readonly<{ language: string; displayType?: string }>): React.ReactElement {
   return (

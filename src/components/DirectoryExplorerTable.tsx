@@ -2,18 +2,18 @@ import type {
   DirectoryExplorerActions,
   DirectoryExplorerRenderers,
   DiscoveryInventoryFile,
-} from '../types/discovery';
-import { formatInteger } from '../utils/numberFormat';
-import { formatBytes } from '../utils/formatBytes';
+} from '../types/discovery.js';
+import { formatInteger } from '../utils/numberFormat.js';
+import { formatBytes } from '../utils/formatBytes.js';
 import {
   computeDirectoryExplorerTotals,
   sumDirectoryExplorerSubfoldersFooter,
   type DirectorySortColumnId,
   type DirectorySortDirection,
   type FlatDirectoryRow,
-} from '../utils/directoryTree';
-import { directorySortAriaValue } from '../utils/directoryExplorerHelpers';
-import { DirectoryExplorerRow } from './DirectoryExplorerRow';
+} from '../utils/directoryTree.js';
+import { directorySortAriaValue } from '../utils/directoryExplorerHelpers.js';
+import { DirectoryExplorerRow } from './DirectoryExplorerRow.js';
 
 function formatCount(value: number): string {
   return formatInteger(value);
