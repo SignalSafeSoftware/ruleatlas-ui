@@ -185,7 +185,7 @@ describe('interactive discovery components', () => {
         rows={[{ name: 'Python', count: 3 }]}
       />,
     );
-    expect(await axe(container)).toHaveNoViolations();
+    expect((await axe(container)).violations).toEqual([]);
   });
 });
 
