@@ -1,3 +1,13 @@
+# RuleAtlas UI current state — 2026-11-15
+
+Source candidate: 0.1.1, based on remote main f69fc545eaabdb1fc534689e8cd97bbb86726dce. The anonymous npm lookup for @ruleatlas/ui returned 404 during inventory. Source readiness does not imply publication. Only the existing tag-triggered hosted release may publish after its checks succeed; no application deployment is part of this package release.
+
+The November audit exposed GHSA-g3hv-75wg-m249 in minimatch and GHSA-mrhx-c7xc-m3w5 in Zod. The candidate updates ESLint within major 10 and pins fixed transitive versions through normal Yarn resolutions. typescript-eslint still requests minimatch 10, so the intentional major resolution must pass the complete lint and Node 22/24 CI matrix; it is not an audit exception. Zod 4 satisfies the React Hooks plugin supported range.
+
+Production components remain unchanged. They receive data and callbacks; application APIs, routing, state and authorization stay in RuleAtlas hosts. Existing CI verifies lint, strict types, interaction/accessibility tests, build, dependency audit and installed ESM/React compatibility on Node 22 and 24. Current results belong in the release ledger; older counts below are historical.
+
+## Historical evidence
+
 # RuleAtlas UI current-state summary
 
 ## Coordinated release preparation — 2026-10-21
