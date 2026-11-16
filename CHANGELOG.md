@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.1.1 — 2026-11-15
+
+- Refresh source, dependency and release-state documentation against current remote main; preserve presentational exports and host-owned data, routing and authorization.
+- Fix the failing security audit with the maintained ESLint 10 release and explicit minimatch 11.0.8 / Zod 4.6.7 transitive resolutions; retain the security gate and verify lint/runtime compatibility.
+- Revalidate the existing locked toolchain, real installed package and React peer compatibility before publication.
+
 ## 0.1.0 — release approved 2026-10-21
 
 - Presentational Discovery components with interaction and accessibility tests.
